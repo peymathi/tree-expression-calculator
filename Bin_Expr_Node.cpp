@@ -23,13 +23,14 @@ Bin_Expr_Node::~Bin_Expr_Node(void)
   delete this->right_;
 }
 
-// Evaluate Method
-int Bin_Expr_Node::evaluate(void)
+// Get left
+Expr_Node * Bin_Expr_Node::get_left(void)
 {
-  // Temporary Integers to store the values from the children's evaluate methods
-  int leftVal = this->left_->evaluate();
-  int rightVal = this->right_->evaluate();
+  return this->left_;
+}
 
-  // Call the subclasses implementation and return it
-  return this->evaluate(leftVal, rightVal);
+// Get right
+Expr_Node * Bin_Expr_Node::get_right(void)
+{
+  return this->right_;
 }

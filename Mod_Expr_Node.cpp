@@ -18,14 +18,8 @@ Mod_Expr_Node::Mod_Expr_Node(Expr_Node * left, Expr_Node * right)
 Mod_Expr_Node::~Mod_Expr_Node(void)
 {}
 
-// Evaluate Method
-int Mod_Expr_Node::evaluate(int num1, int num2)
+// Accept Method
+void Mod_Expr_Node::accept(Expr_Node_Visitor & visitor)
 {
-  // If the second number is zero, throw mod_by_zero exception
-  if(num2 == 0)
-  {
-    throw mod_by_zero();
-  }
-
-  return num1 % num2;
+  visitor.visit_mod_node(*this);
 }

@@ -25,6 +25,14 @@ public:
   // Method to be implemented in base class for specific operation
   virtual int evaluate(int num1, int num2) = 0;
 
+  // Passes the visitor support method to child methods because this is also an abstract class
+  virtual void accept (Expr_Node_Visitor & visitor) = 0;
+
+  // Returns a pointer to the left child
+  Expr_Node * get_left(void);
+
+  // Returns a pointer to the right child
+  Expr_Node * get_right(void);
 
 protected:
   // Pointers to the left and right children

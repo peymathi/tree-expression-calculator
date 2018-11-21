@@ -18,8 +18,8 @@ Mult_Expr_Node::Mult_Expr_Node(Expr_Node * left, Expr_Node * right)
 Mult_Expr_Node::~Mult_Expr_Node(void)
 {}
 
-// Evaluate Method
-int Mult_Expr_Node::evaluate(int num1, int num2)
+// Accept method
+void Mult_Expr_Node::accept(Expr_Node_Visitor & visitor)
 {
-  return num1 * num2;
+  visitor.visit_mult_node(*this);
 }

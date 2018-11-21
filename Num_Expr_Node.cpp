@@ -23,3 +23,9 @@ int Num_Expr_Node::evaluate(void)
 {
   return this->number_;
 }
+
+// Accept method
+void Num_Expr_Node::accept(Expr_Node_Visitor & visitor)
+{
+  visitor.visit_num_node(*this);
+}

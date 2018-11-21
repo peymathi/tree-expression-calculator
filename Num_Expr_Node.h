@@ -23,6 +23,9 @@ public:
   // Evaluate Method returns the number stored by this node
   int evaluate(void);
 
+  // Allows visitor support for this node
+  virtual void accept(Expr_Node_Visitor & visitor);
+
 private:
   // Number that this node holds. This node has no children because it is a leaf node
   int number_;

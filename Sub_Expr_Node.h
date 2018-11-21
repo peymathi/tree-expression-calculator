@@ -20,8 +20,8 @@ public:
   // Destructor
   ~Sub_Expr_Node(void);
 
-  // Evaluate Method
-  int evaluate(int num1, int num2);
+  // Allows visitor support for this node
+  virtual void accept(Expr_Node_Visitor & visiter);
 
 };
 

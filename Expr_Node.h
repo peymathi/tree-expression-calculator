@@ -5,6 +5,9 @@
 #ifndef _EXPR_NODE_
 #define _EXPR_NODE_
 
+// Includes the visitor class for this class to allow visitor support
+#include "Expr_Node_Visitor.h"
+
 class Expr_Node
 {
 public:
@@ -14,8 +17,8 @@ public:
   // Destructor
   virtual ~Expr_Node (void) = 0;
 
-  // Virtual Evalutate Method to be implemented in all subclasses
-  virtual int evaluate (void) = 0;
+  // To be implemented in all concrete classes to allow visitor support
+  virtual void accept (Expr_Node_Visitor & visitor) = 0;
 
 };
 

@@ -12,16 +12,7 @@
 class Mod_Expr_Node : public Bin_Expr_Node
 {
 public:
-  // Exception to be thrown when modulus by zero is attempted
-  class mod_by_zero : public std::exception
-  {
-    // Default Constructor
-    mod_by_zero(void)
-    : std::exception(void)
-    {}
-
-  };
-
+  
   // Default Constructor
   Mod_Expr_Node(void);
 
@@ -31,8 +22,8 @@ public:
   // Destructor
   ~Mod_Expr_Node(void);
 
-  // Evaluate Method
-  int evaluate(int num1, int num2);
+  // Allows visitor support for this node
+  virtual void accept(Expr_Node_Visitor & visitor);
 
 };
 

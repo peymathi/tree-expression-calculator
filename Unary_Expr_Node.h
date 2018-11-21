@@ -20,8 +20,11 @@ public:
   // Destructor
   ~Unary_Expr_Node(void);
 
-  // Evaluate Method
-  int evaluate(void);
+  // Allows visitor support for this node
+  virtual void accept(Expr_Node_Visitor & visitor);
+
+  // Returns a pointer to the child
+  Expr_Node * get_child(void);
 
 protected:
   // Expr_Node Child for this Unary Node

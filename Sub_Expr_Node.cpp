@@ -18,8 +18,8 @@ Sub_Expr_Node::Sub_Expr_Node(Expr_Node * left, Expr_Node right)
 Sub_Expr_Node::~Sub_Expr_Node(void)
 {}
 
-// Evalutate Method
-int Sub_Expr_Node::evaluate(int num1, int num2)
+// Accept method
+void Sub_Expr_Node::accept(Expr_Node_Visitor & visitor)
 {
-  return num1 - num2;
+  visitor.visit_sub_node(*this);
 }

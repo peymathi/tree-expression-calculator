@@ -20,9 +20,14 @@ Unary_Expr_Node::~Unary_Expr_Node(void)
   delete this->child_;
 }
 
-// Evaluate Method
-int Unary_Expr_Node::evaluate(void)
+// Accept method
+void Unary_Expr_Node::accept(Expr_Node_Visitor & visitor)
 {
-  // Calls the child's evaluate method and returns it
-  return this->child_->evaluate();
+  visitor.visit_unary_node(*this);
+}
+
+// Get child
+Expr_Node * Unary_Expr_Node::get_child(void)
+{
+  return this->child_
 }

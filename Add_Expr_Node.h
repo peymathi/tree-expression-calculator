@@ -20,8 +20,8 @@ public:
   // Destructor
   ~Add_Expr_Node(void);
 
-  // Evaluate method parameterized for the addition operation
-  virtual int evaluate(int num1, int num2);
+  // Allows visitor support this node
+  virtual void accept(Expr_Node_Visitor & visitor);
 
 };
 

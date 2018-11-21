@@ -12,15 +12,6 @@
 class Div_Expr_Node : public Bin_Expr_Node
 {
 public:
-  // Exception to be thrown when dividing by zero is attempted
-  class divide_by_zero : public std::exception
-  {
-    // Default Constructor
-    divide_by_zero(void)
-    : std::exception(void)
-    {}
-
-  };
 
   // Default Constructor
   Div_Expr_Node(void);
@@ -31,8 +22,8 @@ public:
   // Destructor
   ~Div_Expr_Node(void);
 
-  // Evalutate Method
-  int evaluate(int num1, int num2);
+  // Allows visitor support for this node
+  virtual void accept(Expr_Node_Visitor & visitor);
 
 };
 

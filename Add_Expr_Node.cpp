@@ -18,8 +18,8 @@ Add_Expr_Node::Add_Expr_Node(Expr_Node * left, Expr_Node * right)
 Add_Expr_Node::~Add_Expr_Node(void)
 {}
 
-// Evaluate Method
-int Add_Expr_Node::evaluate(int num1, int num2)
+// Accept method
+void Add_Expr_Node::accept(Expr_Node_Visitor & visitor)
 {
-  return num1 + num2;
+  visitor.visit_add_node(*this);
 }
