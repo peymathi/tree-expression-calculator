@@ -11,9 +11,18 @@
 class Add_Expr_Node : public Bin_Expr_Node
 {
 public:
+  // Default Constructor
+  Add_Expr_Node(void);
 
-private:
-  
+  // Initializing Constructor
+  Add_Expr_Node(Expr_Node * left, Expr_Node * right);
+
+  // Destructor
+  ~Add_Expr_Node(void);
+
+  // Evaluate method parameterized for the addition operation
+  virtual int evaluate(int num1, int num2);
+
 };
 
 #endif

@@ -11,9 +11,17 @@
 class Mult_Expr_Node : public Bin_Expr_Node
 {
 public:
+  // Default Constructor
+  Mult_Expr_Node(void);
 
-private:
-  
+  // Initializing Constructor
+  Mult_Expr_Node(Expr_Node * left, Expr_Node * right);
+
+  // Destructor
+  ~Mult_Expr_Node(void);
+
+  // Evalutate Method
+  int evaluate(int num1, int num2);
 
 };
 

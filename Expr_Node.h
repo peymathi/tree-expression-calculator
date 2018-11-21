@@ -8,8 +8,14 @@
 class Expr_Node
 {
 public:
+  // Default Constructor
+  Expr_Node (void);
 
-private:
+  // Destructor
+  virtual ~Expr_Node (void) = 0;
+
+  // Virtual Evalutate Method to be implemented in all subclasses
+  virtual int evaluate (void) = 0;
 
 };
 

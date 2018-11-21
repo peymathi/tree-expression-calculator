@@ -11,9 +11,18 @@
 class Sub_Expr_Node : public Bin_Expr_Node
 {
 public:
+  // Default Constructor
+  Sub_Expr_Node(void);
 
-private:
-  
+  // Initializing Constructor
+  Sub_Expr_Node(Expr_Node * left, Expr_Node * right);
+
+  // Destructor
+  ~Sub_Expr_Node(void);
+
+  // Evaluate Method
+  int evaluate(int num1, int num2);
+
 };
 
 #endif

@@ -1,1 +1,35 @@
 /* I pledge that I have neither given nor receieved any help on this assignment */
+
+// Implementation for the Bin_Expr_Node class
+
+#include "Bin_Expr_Node.h"
+
+// Default Constructor
+Bin_Expr_Node::Bin_Expr_Node(void)
+: left_(nullptr),
+  right_(nullptr)
+{}
+
+// Initializing Constructor
+Bin_Expr_Node::Bin_Expr_Node(Expr_Node * left, Expr_Node * right)
+: left_(left),
+  right_(right)
+{}
+
+// Destructor
+Bin_Expr_Node::~Bin_Expr_Node(void)
+{
+  delete this->left_;
+  delete this->right_;
+}
+
+// Evaluate Method
+int Bin_Expr_Node::evaluate(void)
+{
+  // Temporary Integers to store the values from the children's evaluate methods
+  int leftVal = this->left_->evaluate();
+  int rightVal = this->right_->evaluate();
+
+  // Call the subclasses implementation and return it
+  return this->evaluate(leftVal, rightVal);
+}

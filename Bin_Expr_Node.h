@@ -10,8 +10,26 @@
 class Bin_Expr_Node : public Expr_Node
 {
 public:
+  // Default Constructor
+  Bin_Expr_Node(void);
 
-private:
+  // Initializing Constructor
+  Bin_Expr_Node(Expr_Node * left, Expr_Node right);
+
+  // Destructor
+  ~Bin_Expr_Node(void);
+
+  // Template method that provides the base skeleton for all evaluate operations in subclasses
+  virtual int evaluate(void);
+
+  // Method to be implemented in base class for specific operation
+  virtual int evaluate(int num1, int num2) = 0;
+
+
+protected:
+  // Pointers to the left and right children
+  Expr_Node * left_;
+  Expr_Node * right_;
 
 };
 

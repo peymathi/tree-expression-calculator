@@ -11,9 +11,22 @@
 class Num_Expr_Node : public Expr_Node
 {
 public:
+  // Default Constructor
+  Num_Expr_Node(void);
+
+  // Initializing Constructor
+  Num_Expr_Node(int num);
+
+  // Destructor
+  ~Num_Expr_Node(void);
+
+  // Evaluate Method returns the number stored by this node
+  int evaluate(void);
 
 private:
-  
+  // Number that this node holds. This node has no children because it is a leaf node
+  int number_;
+
 };
 
 #endif

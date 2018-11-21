@@ -11,8 +11,21 @@
 class Unary_Expr_Node : public Expr_Node
 {
 public:
+  // Default Constructor
+  Unary_Expr_Node(void);
 
-private:
+  // Initializing Constructor
+  Unary_Expr_Node(Expr_Node * child);
+
+  // Destructor
+  ~Unary_Expr_Node(void);
+
+  // Evaluate Method
+  int evaluate(void);
+
+protected:
+  // Expr_Node Child for this Unary Node
+  Expr_Node * child_;
 
 };
 
