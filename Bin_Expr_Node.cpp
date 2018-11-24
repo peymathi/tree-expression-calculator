@@ -34,3 +34,15 @@ Expr_Node * Bin_Expr_Node::get_right(void)
 {
   return this->right_;
 }
+
+// Set left
+void Bin_Expr_Node::set_left(Expr_Node * left)
+{
+  this->left_ = left;
+}
+
+// Set right
+void Bin_Expr_Node::set_right(Expr_Node * right)
+{
+  this->right_ = right;
+}

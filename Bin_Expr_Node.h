@@ -14,7 +14,7 @@ public:
   Bin_Expr_Node(void);
 
   // Initializing Constructor
-  Bin_Expr_Node(Expr_Node * left, Expr_Node right);
+  Bin_Expr_Node(Expr_Node * left, Expr_Node * right);
 
   // Destructor
   ~Bin_Expr_Node(void);
@@ -33,6 +33,12 @@ public:
 
   // Returns a pointer to the right child
   Expr_Node * get_right(void);
+
+  // Sets the left pointer
+  void set_left(Expr_Node * left);
+
+  // Sets the right pointer
+  void set_right(Expr_Node * right);
 
 protected:
   // Pointers to the left and right children
