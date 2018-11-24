@@ -6,12 +6,12 @@
 
 // Defalut Constructor
 Mult_Expr_Node::Mult_Expr_Node(void)
-: Bin_Expr_Node(void)
+: Bin_Expr_Node("MULT")
 {}
 
 // Initializing Constructor
 Mult_Expr_Node::Mult_Expr_Node(Expr_Node * left, Expr_Node * right)
-: Bin_Expr_Node(left, right)
+: Bin_Expr_Node("MULT", left, right)
 {}
 
 // Destructor

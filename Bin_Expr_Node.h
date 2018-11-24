@@ -6,12 +6,13 @@
 #define _BIN_EXPR_NODE_
 
 #include "Expr_Node.h"
+#include <string.h>
 
 class Bin_Expr_Node : public Expr_Node
 {
 public:
   // Default Constructor
-  Bin_Expr_Node(void);
+  Bin_Expr_Node(const std::string id);
 
   // Initializing Constructor
   Bin_Expr_Node(Expr_Node * left, Expr_Node * right);

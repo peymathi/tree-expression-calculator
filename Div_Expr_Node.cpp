@@ -6,12 +6,12 @@
 
 // Default Constructor
 Div_Expr_Node::Div_Expr_Node(void)
-: Bin_Expr_Node(void)
+: Bin_Expr_Node("DIV")
 {}
 
 // Initializing Constructor
 Div_Expr_Node::Div_Expr_Node(Expr_Node * left, Expr_Node * right)
-: Bin_Expr_Node(left, right)
+: Bin_Expr_Node("DIV", left, right)
 {}
 
 // Destructor

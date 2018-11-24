@@ -6,12 +6,12 @@
 
 // Default Constructor
 Add_Expr_Node::Add_Expr_Node(void)
-: Bin_Expr_Node(void)
+: Bin_Expr_Node("ADD"),
 {}
 
 // Initializing Constructor
 Add_Expr_Node::Add_Expr_Node(Expr_Node * left, Expr_Node * right)
-: Bin_Expr_Node(left, right)
+: Bin_Expr_Node("ADD", left, right)
 {}
 
 // Destructor

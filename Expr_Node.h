@@ -12,13 +12,16 @@ class Expr_Node
 {
 public:
   // Default Constructor
-  Expr_Node (void);
+  Expr_Node (const std::string id);
 
   // Destructor
   virtual ~Expr_Node (void) = 0;
 
   // To be implemented in all concrete classes to allow visitor support
   virtual void accept (Expr_Node_Visitor & visitor) = 0;
+
+  // String to contain the type
+  const std::string ID;
 
 };
 

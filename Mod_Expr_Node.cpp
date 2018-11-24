@@ -6,12 +6,12 @@
 
 // Defalut Constructor
 Mod_Expr_Node::Mod_Expr_Node(void)
-: Bin_Expr_Node(void)
+: Bin_Expr_Node("MOD")
 {}
 
 // Initializing Constructor
 Mod_Expr_Node::Mod_Expr_Node(Expr_Node * left, Expr_Node * right)
-: Bin_Expr_Node(left, right)
+: Bin_Expr_Node("MOD", left, right)
 {}
 
 // Destructor

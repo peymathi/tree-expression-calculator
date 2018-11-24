@@ -5,14 +5,16 @@
 #include "Bin_Expr_Node.h"
 
 // Default Constructor
-Bin_Expr_Node::Bin_Expr_Node(void)
-: left_(nullptr),
+Bin_Expr_Node::Bin_Expr_Node(const std::string id)
+: Expr_Node(id),
+  left_(nullptr),
   right_(nullptr)
 {}
 
 // Initializing Constructor
-Bin_Expr_Node::Bin_Expr_Node(Expr_Node * left, Expr_Node * right)
-: left_(left),
+Bin_Expr_Node::Bin_Expr_Node(const std::string id, Expr_Node * left, Expr_Node * right)
+: Expr_Node(id),
+  left_(left),
   right_(right)
 {}
 

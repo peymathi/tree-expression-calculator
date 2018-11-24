@@ -6,12 +6,14 @@
 
 // Default Constructor
 Num_Expr_Node::Num_Expr_Node(void)
-: this->number_(0)
+: Expr_Node("NUM"),
+  this->number_(0)
 {}
 
 // Initializing Constructor
 Num_Expr_Node::Num_Expr_Node(int num)
-: this->number_(num)
+: Expr_Node("NUM"),
+  this->number_(num)
 {}
 
 // Destructor
