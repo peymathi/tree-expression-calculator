@@ -19,7 +19,7 @@ Div_Expr_Node::~Div_Expr_Node(void)
 {}
 
 // Accept method
-void Div_Expr_Node::accept(Expr_Node_Visitor & visitor)
+void Div_Expr_Node::accept(Expr_Node_Visitor & visitor) const
 {
   visitor.visit_div_node(*this);
 }

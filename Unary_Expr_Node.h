@@ -7,6 +7,7 @@
 #define _UNARY_EXPR_NODE_
 
 #include "Expr_Node.h"
+#include "Expr_Node_Visitor.h"
 
 class Unary_Expr_Node : public Expr_Node
 {
@@ -20,8 +21,8 @@ public:
   // Destructor
   ~Unary_Expr_Node(void);
 
-  // Allows visitor support for this node
-  virtual void accept(Expr_Node_Visitor & visitor);
+  // Allows visitor support for sub class nodes
+  virtual void accept(Expr_Node_Visitor & visitor) const = 0;
 
   // Returns a pointer to the child
   Expr_Node * get_child(void);

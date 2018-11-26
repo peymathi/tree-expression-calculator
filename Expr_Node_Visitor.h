@@ -6,14 +6,13 @@
 #ifndef _EXPR_NODE_VISITOR_
 #define _EXPR_NODE_VISITOR_
 
-// Include the entire Expr_Node class structure
-#include "Add_Expr_Node.h"
-#include "Mult_Expr_Node.h"
-#include "Sub_Expr_Node.h"
-#include "Mod_Expr_Node.h"
-#include "Div_Expr_Node.h"
-#include "Num_Expr_Node.h"
-#include "Unary_Expr_Node.h"
+// Forward declaration because these classes both include each other
+class Add_Expr_Node;
+class Mult_Expr_Node;
+class Sub_Expr_Node;
+class Mod_Expr_Node;
+class Div_Expr_Node;
+class Num_Expr_Node;
 
 class Expr_Node_Visitor
 {
@@ -26,8 +25,11 @@ public:
   virtual void visit_sub_node(const Sub_Expr_Node & node) = 0;
   virtual void visit_mult_node(const Mult_Expr_Node & node) = 0;
   virtual void visit_div_node(const Div_Expr_Node & node) = 0;
-  virutal void visit_mod_node(const Mod_Expr_Node & node) = 0;
-  virutal void visit_num_node(const Num_Expr_Node & node) = 0;
+  virtual void visit_mod_node(const Mod_Expr_Node & node) = 0;
+  virtual void visit_num_node(const Num_Expr_Node & node) = 0;
+
+  // Returns a result of a visitors operation if there is one
+  virtual int get_result(void) const = 0;
 
 };
 

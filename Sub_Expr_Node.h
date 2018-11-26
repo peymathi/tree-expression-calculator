@@ -21,7 +21,7 @@ public:
   ~Sub_Expr_Node(void);
 
   // Allows visitor support for this node
-  virtual void accept(Expr_Node_Visitor & visiter);
+  virtual void accept(Expr_Node_Visitor & visitor) const;
 
 };
 

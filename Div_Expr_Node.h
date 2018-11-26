@@ -7,6 +7,7 @@
 #define _DIV_EXPR_NODE_
 
 #include "Bin_Expr_Node.h"
+#include "Expr_Node_Visitor.h"
 #include <exception>
 
 class Div_Expr_Node : public Bin_Expr_Node
@@ -23,7 +24,7 @@ public:
   ~Div_Expr_Node(void);
 
   // Allows visitor support for this node
-  virtual void accept(Expr_Node_Visitor & visitor);
+  virtual void accept(Expr_Node_Visitor & visitor) const;
 
 };
 

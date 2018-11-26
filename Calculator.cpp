@@ -1,4 +1,4 @@
-operators_/* I pledge that I have neither given nor received any help on this assignment */
+/* I pledge that I have neither given nor received any help on this assignment */
 
 // Implementation for the Calculator class
 
@@ -90,7 +90,7 @@ void Calculator::infix_to_postfix(void)
     else if(token == "/")
     {
       move_operators(token);
-      this->operators_->push(token)
+      this->operators_->push(token);
     }
 
     // Test for modulus
@@ -103,8 +103,8 @@ void Calculator::infix_to_postfix(void)
     // Test for open parenthesis
     else if(token == "(")
     {
-      // Push a nullptr onto the stack to represent the open parenthesis
-      this->operators_->push(nullptr);
+      // Push an open parenthesis onto the stack
+      this->operators_->push("(");
     }
 
     // Test for closed parenthesis
@@ -113,8 +113,8 @@ void Calculator::infix_to_postfix(void)
       // Pops elements off the stack and enqueues them to postfix_ until open parenthesis is found
       while(!this->operators_->is_empty())
       {
-        // If the top does not equal nullptr, pop element and enqueue to postfix
-        if(this->operators_->top() != nullptr)
+        // If the top does not equal an open parenthesis, pop element and enqueue to postfix
+        if(this->operators_->top() != "(")
         {
           this->postfix_->enqueue(this->operators_->pop());
 
@@ -123,7 +123,7 @@ void Calculator::infix_to_postfix(void)
           if(this->operators_->is_empty())
           {
 
-            throw logic_exception();
+            throw Expr_Builder::logic_error();
           }
         }
 
@@ -147,7 +147,7 @@ void Calculator::infix_to_postfix(void)
   while(!this->operators_->is_empty())
   {
     // Test to see if the operand on stack is an open parenthesis
-    if(this->operators_->top() != nullptr)
+    if(this->operators_->top() != "(")
     {
       this->postfix_->enqueue(this->operators_->pop());
     }
@@ -155,7 +155,7 @@ void Calculator::infix_to_postfix(void)
     // An open parenthesis was not closed. Throw logic error
     else
     {
-      throw logic_exception();
+      throw Expr_Builder::logic_error();
     }
   }
 
@@ -167,7 +167,7 @@ void Calculator::move_operators(std::string token)
   if(token == "+" || token == "-")
   {
     // Pop operators off the stack until the stack is empty or an open parenthesis is found
-    while(!this->operators_->is_empty() && this->operators_->top() != nullptr)
+    while(!this->operators_->is_empty() && this->operators_->top() != "(")
     {
       this->postfix_->enqueue(this->operators_->pop());
     }
@@ -178,7 +178,7 @@ void Calculator::move_operators(std::string token)
   {
     // Pop operators off the stack until the stack is empty, an open parenthesis is found, or the
     // top is a "+" or "-"
-    while(!this->operators_->is_empty() && this->operators_->top() != nullptr)
+    while(!this->operators_->is_empty() && this->operators_->top() != "(")
     {
       if(this->operators_->top() == "+" || this->operators_->top() == "-")
       {
@@ -203,42 +203,42 @@ void Calculator::build_tree(void)
 
   while(!this->postfix_->is_empty())
   {
-    token = this->postfix_->deqeueue();
+    token = this->postfix_->dequeue();
 
     // Number Test
     if(this->is_int(token))
     {
-      builder->build_num_node((int)token);
+      builder->build_num(std::stoi(token));
     }
 
     // Addition Test
     else if(token == "+")
     {
-      builder->build_add_node();
+      builder->build_add_operator();
     }
 
     // Subtraction Test
     else if(token == "-")
     {
-      builder->build_sub_node();
+      builder->build_sub_operator();
     }
 
     // Multiplication Test
     else if(token == "*")
     {
-      builder->build_mult_node();
+      builder->build_mult_operator();
     }
 
     // Division Test
     else if(token == "/")
     {
-      builder->build_div_node();
+      builder->build_div_operator();
     }
 
     // Modulus Test
     else if(token == "%")
     {
-      builder->build_mod_node();
+      builder->build_mod_operator();
     }
   }
 }
@@ -247,7 +247,7 @@ void Calculator::build_tree(void)
 bool Calculator::is_int(std::string token)
 {
   // Converts the string to a c style string for digit testing
-  const char * cstring = test.c_str();
+  const char * cstring = token.c_str();
 
   // All tokens inputted in the expression will run through this test for integer. Therefore, this algorithm
   // must consider all cases.
@@ -256,7 +256,7 @@ bool Calculator::is_int(std::string token)
   if(isdigit(cstring[0]) || cstring[0] == '-')
   {
     // Test the rest of the string for integers only
-    for(size_t i = 1; i < test.length(); i++)
+    for(size_t i = 1; i < token.length(); i++)
     {
       // If the element at i is not a digit, return false
       if(!isdigit(cstring[i]))
@@ -266,7 +266,7 @@ bool Calculator::is_int(std::string token)
     }
 
     // If the token is a single character that is '-', then this is the subraction token not an integer
-    if(test.length() == 1 && cstring[0] == '-')
+    if(token.length() == 1 && cstring[0] == '-')
     {
       return false;
     }

@@ -6,12 +6,12 @@
 
 // Default Constructor
 Sub_Expr_Node::Sub_Expr_Node(void)
-: Bin_Expr_Node(void)
+: Bin_Expr_Node("SUB")
 {}
 
 // Initializing Constructor
-Sub_Expr_Node::Sub_Expr_Node(Expr_Node * left, Expr_Node right)
-: Bin_Expr_Node(left, right)
+Sub_Expr_Node::Sub_Expr_Node(Expr_Node * left, Expr_Node * right)
+: Bin_Expr_Node("SUB", left, right)
 {}
 
 // Destructor
@@ -19,7 +19,7 @@ Sub_Expr_Node::~Sub_Expr_Node(void)
 {}
 
 // Accept method
-void Sub_Expr_Node::accept(Expr_Node_Visitor & visitor)
+void Sub_Expr_Node::accept(Expr_Node_Visitor & visitor) const
 {
   visitor.visit_sub_node(*this);
 }

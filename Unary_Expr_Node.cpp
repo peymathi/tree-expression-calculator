@@ -6,12 +6,14 @@
 
 // Default Constructor
 Unary_Expr_Node::Unary_Expr_Node(void)
-: child_(nullptr)
+: Expr_Node("UNARY"),
+  child_(nullptr)
 {}
 
 // Initializing Constructor
 Unary_Expr_Node::Unary_Expr_Node(Expr_Node * child)
-: child_(child)
+: Expr_Node("UNARY"),
+  child_(child)
 {}
 
 // Destructor
@@ -20,14 +22,8 @@ Unary_Expr_Node::~Unary_Expr_Node(void)
   delete this->child_;
 }
 
-// Accept method
-void Unary_Expr_Node::accept(Expr_Node_Visitor & visitor)
-{
-  visitor.visit_unary_node(*this);
-}
-
 // Get child
 Expr_Node * Unary_Expr_Node::get_child(void)
 {
-  return this->child_
+  return this->child_;
 }

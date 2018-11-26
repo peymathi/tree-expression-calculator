@@ -19,7 +19,7 @@ Add_Expr_Node::~Add_Expr_Node(void)
 {}
 
 // Accept method
-void Add_Expr_Node::accept(Expr_Node_Visitor & visitor)
+void Add_Expr_Node::accept(Expr_Node_Visitor & visitor) const
 {
   visitor.visit_add_node(*this);
 }

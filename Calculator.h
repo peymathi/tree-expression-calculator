@@ -9,6 +9,7 @@
 #include "Expr_Tree.h"
 #include "Stack.h"
 #include "Queue.h"
+#include <sstream>
 
 class Calculator
 {
@@ -16,8 +17,19 @@ public:
   // Exception to be thrown when an invalid token is entered
   class invalid_token : public std::exception
   {
+  public:
     // Default Constructor
     invalid_token(void)
+    : std::exception()
+    {}
+  };
+
+  // Exception to be thrown when evaluation is attempted on an empty expression
+  class empty_expression : public std::exception
+  {
+  public:
+    // Default Constructor
+    empty_expression(void)
     : std::exception()
     {}
   };
@@ -58,7 +70,7 @@ private:
   void infix_to_postfix(void);
 
   // Helper method for infix_to_postfix. Moves operators around according to precedence
-  void move_operators(std::string token, Queue<std::string> & postfix);
+  void move_operators(std::string token);
 
   // Builds the Expression tree from the currently saved string
   void build_tree(void);

@@ -23,7 +23,7 @@ int Expr_Tree::evaluate(void)
 
   // Call the accept method on the root so that the visitor can iterate the enitre tree
   // and calculate the result and store it in its state
-  this->root_->accept(evaluator);
+  this->root_->accept(*evaluator);
 
   // Set this objects result member to the result member of the visitor object
   this->result_ = evaluator->get_result();

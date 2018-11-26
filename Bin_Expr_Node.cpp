@@ -26,13 +26,13 @@ Bin_Expr_Node::~Bin_Expr_Node(void)
 }
 
 // Get left
-Expr_Node * Bin_Expr_Node::get_left(void)
+Expr_Node * Bin_Expr_Node::get_left(void) const
 {
   return this->left_;
 }
 
 // Get right
-Expr_Node * Bin_Expr_Node::get_right(void)
+Expr_Node * Bin_Expr_Node::get_right(void) const
 {
   return this->right_;
 }

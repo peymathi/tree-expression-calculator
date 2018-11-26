@@ -8,9 +8,40 @@
 
 #include "Expr_Node_Visitor.h"
 
+// Include all of the nodes within the node structure because this class needs the complete type
+// rather than forward declaration as in the base class
+#include "Add_Expr_Node.h"
+#include "Sub_Expr_Node.h"
+#include "Mult_Expr_Node.h"
+#include "Div_Expr_Node.h"
+#include "Mod_Expr_Node.h"
+#include "Num_Expr_Node.h"
+
 class Eval_Expr_Tree : public Expr_Node_Visitor
 {
 public:
+  // Exception to be thrown when division by zero is attempted
+  class divide_by_zero : public std::exception
+  {
+  public:
+    // Default Constructor
+    divide_by_zero(void)
+    : std::exception()
+    {}
+
+  };
+
+  // Exception to be thrown when mod by zero is attempted
+  class mod_by_zero : public std::exception
+  {
+  public:
+    // Default Constructor
+    mod_by_zero(void)
+    : std::exception()
+    {}
+
+  };
+
   // Default Constructor
   Eval_Expr_Tree(void);
 

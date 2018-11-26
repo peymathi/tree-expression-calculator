@@ -7,6 +7,7 @@
 
 // Includes the visitor class for this class to allow visitor support
 #include "Expr_Node_Visitor.h"
+#include <string>
 
 class Expr_Node
 {
@@ -18,7 +19,7 @@ public:
   virtual ~Expr_Node (void) = 0;
 
   // To be implemented in all concrete classes to allow visitor support
-  virtual void accept (Expr_Node_Visitor & visitor) = 0;
+  virtual void accept (Expr_Node_Visitor & visitor) const = 0;
 
   // String to contain the type
   const std::string ID;

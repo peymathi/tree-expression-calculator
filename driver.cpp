@@ -3,6 +3,11 @@
 // Driver for the program
 
 #include "Calculator.h"
+
+// For exceptions
+#include "Eval_Expr_Tree.h"
+#include "Expr_Builder.h"
+
 #include <iostream>
 
 int main()
@@ -39,21 +44,33 @@ int main()
     }
 
     // Catches Divide by zero exception
-    catch(divide_by_zero ex)
+    catch(Eval_Expr_Tree::divide_by_zero ex)
     {
       std::cout << "Expression attempts to divide by zero. Please try again." << std::endl;
     }
 
     // Catches Mod by zero exception
-    catch(mod_by_zero ex)
+    catch(Eval_Expr_Tree::mod_by_zero ex)
     {
       std::cout << "Expression attempts to take a modulus by zero. Please try again." << std::endl;
     }
 
     // Catches logic error
-    catch(logic_error ex)
+    catch(Expr_Builder::logic_error ex)
     {
       std::cout << "Logic error in the entered expression. Please try again." << std::endl;
+    }
+
+    // Catches empty exception
+    catch(Calculator::empty_expression ex)
+    {
+      std::cout << "No expression entered. Please try again." << std::endl;
+    }
+
+    // Catches invalid token exception
+    catch(Calculator::invalid_token ex)
+    {
+      std::cout << "Invalid Token entered. Please try again." << std::endl;
     }
 
     // Catches unknown errors

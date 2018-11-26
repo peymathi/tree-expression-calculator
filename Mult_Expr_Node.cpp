@@ -19,7 +19,7 @@ Mult_Expr_Node::~Mult_Expr_Node(void)
 {}
 
 // Accept method
-void Mult_Expr_Node::accept(Expr_Node_Visitor & visitor)
+void Mult_Expr_Node::accept(Expr_Node_Visitor & visitor) const
 {
   visitor.visit_mult_node(*this);
 }

@@ -7,12 +7,13 @@
 #define _MOD_EXPR_NODE_
 
 #include "Bin_Expr_Node.h"
+#include "Expr_Node_Visitor.h"
 #include <exception>
 
 class Mod_Expr_Node : public Bin_Expr_Node
 {
 public:
-  
+
   // Default Constructor
   Mod_Expr_Node(void);
 
@@ -23,7 +24,7 @@ public:
   ~Mod_Expr_Node(void);
 
   // Allows visitor support for this node
-  virtual void accept(Expr_Node_Visitor & visitor);
+  virtual void accept(Expr_Node_Visitor & visitor) const;
 
 };
 

@@ -2,73 +2,73 @@
 
 project (assignment4) {
 
-exename = assignment4
-install = .
+  exename = assignment4
+  install = .
 
-specific (make, gnuance) {
-  compile_flags += -std=c++11
-}
+  specific (make, gnuance) {
+    compile_flags += -std=c++11
+  }
 
-Header_Files {
-  Add_Expr_Node.h
-  Array_Base.h
-  Array_Iterator.h
-  Array.h
-  Bin_Expr_Node.h
-  Calculator.h
-  Div_Expr_Node.h
-  Eval_Expr_Tree.h
-  Expr_Builder.h
-  Expr_Node_Visitor.h
-  Expr_Node.h
-  Expr_Tree_Builder.h
-  Expr_Tree.h
-  Math_Expr.h
-  Mod_Expr_Node.h
-  Mult_Expr_Node.h
-  Num_Expr_Node.h
-  Queue.h
-  Stack.h
-  Sub_Expr_Node.h
-  Unary_Expr_Node.h
-}
+  Header_Files {
+    Expr_Node.h
+    Add_Expr_Node.h
+    Array_Base.h
+    Array_Iterator.h
+    Array.h
+    Bin_Expr_Node.h
+    Calculator.h
+    Div_Expr_Node.h
+    Eval_Expr_Tree.h
+    Expr_Builder.h
+    Expr_Node_Visitor.h
+    Expr_Tree_Builder.h
+    Expr_Tree.h
+    Math_Expr.h
+    Mod_Expr_Node.h
+    Mult_Expr_Node.h
+    Num_Expr_Node.h
+    Queue.h
+    Stack.h
+    Sub_Expr_Node.h
+    Unary_Expr_Node.h
+  }
 
-Source_Files {
-  Bin_Expr_Node.cpp
-  Calculator.cpp
-  Div_Expr_Node.cpp
-  driver.cpp
-  Eval_Expr_Tree.cpp
-  Expr_Builder.cpp
-  Expr_Node_Visitor.cpp
-  Expr_Node.cpp
-  Expr_Tree_Builder.cpp
-  Expr_Tree.cpp
-  Math_Expr.cpp
-  Mod_Expr_Node.cpp
-  Mult_Expr_Node.cpp
-  Num_Expr_Node.cpp
-  Sub_Expr_Node.cpp
-  Unary_Expr_Node.cpp
-}
+  Source_Files {
+    Bin_Expr_Node.cpp
+    Calculator.cpp
+    Div_Expr_Node.cpp
+    driver.cpp
+    Eval_Expr_Tree.cpp
+    Expr_Builder.cpp
+    Expr_Node_Visitor.cpp
+    Expr_Node.cpp
+    Expr_Tree_Builder.cpp
+    Expr_Tree.cpp
+    Math_Expr.cpp
+    Mod_Expr_Node.cpp
+    Mult_Expr_Node.cpp
+    Num_Expr_Node.cpp
+    Sub_Expr_Node.cpp
+    Unary_Expr_Node.cpp
+  }
 
-Template_Files {
-  Array_Base.cpp
-  Array_Iterator.cpp
-  Array.cpp
-  Queue.cpp
-  Stack.cpp
-}
+  Template_Files {
+    Array_Base.cpp
+    Array_Iterator.cpp
+    Array.cpp
+    Queue.cpp
+    Stack.cpp
+  }
 
-Inline_Files {
-  Array_Base.inl
-  Array.inl
-  Calculator.inl
-  Eval_Expr_Tree.inl
-  Expr_Tree.inl
-  Math_Expr.inl
-  Queue.inl
-  Stack.inl
-}
+  Inline_Files {
+    Array_Base.inl
+    Array.inl
+    Calculator.inl
+    Eval_Expr_Tree.inl
+    Expr_Tree.inl
+    Math_Expr.inl
+    Queue.inl
+    Stack.inl
+  }
 
 }

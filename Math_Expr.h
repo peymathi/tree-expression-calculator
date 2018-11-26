@@ -20,7 +20,7 @@ public:
   // Returns the result
   int get_result(void);
 
-private:
+protected:
   // Holds the result of the mathematical expression
   int result_;
 

@@ -42,7 +42,7 @@ public:
   virtual void build_mod_operator(void);
 
   // Builds the actual tree and then returns it
-  Math_Tree * get_expression(void);
+  Math_Expr * get_expression(void);
 
 private:
 
@@ -56,8 +56,5 @@ private:
   Expr_Node * current_node_;
 
 };
-
-// Include the inline implementation
-#include "Expr_Tree_Builder.inl"
 
 #endif

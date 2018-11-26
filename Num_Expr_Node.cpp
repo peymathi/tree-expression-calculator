@@ -7,13 +7,13 @@
 // Default Constructor
 Num_Expr_Node::Num_Expr_Node(void)
 : Expr_Node("NUM"),
-  this->number_(0)
+  number_(0)
 {}
 
 // Initializing Constructor
 Num_Expr_Node::Num_Expr_Node(int num)
 : Expr_Node("NUM"),
-  this->number_(num)
+  number_(num)
 {}
 
 // Destructor
@@ -21,13 +21,13 @@ Num_Expr_Node::~Num_Expr_Node(void)
 {}
 
 // Evaluate Method
-int Num_Expr_Node::evaluate(void)
+int Num_Expr_Node::evaluate(void) const
 {
   return this->number_;
 }
 
 // Accept method
-void Num_Expr_Node::accept(Expr_Node_Visitor & visitor)
+void Num_Expr_Node::accept(Expr_Node_Visitor & visitor) const
 {
   visitor.visit_num_node(*this);
 }

@@ -19,7 +19,7 @@ Mod_Expr_Node::~Mod_Expr_Node(void)
 {}
 
 // Accept Method
-void Mod_Expr_Node::accept(Expr_Node_Visitor & visitor)
+void Mod_Expr_Node::accept(Expr_Node_Visitor & visitor) const
 {
   visitor.visit_mod_node(*this);
 }

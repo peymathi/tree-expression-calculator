@@ -14,13 +14,14 @@ public:
   // Exception to be thrown when a logic error occurs
   class logic_error : public std::exception
   {
+  public:
     // Default Constructor
     logic_error(void)
     : std::exception()
     {}
 
   };
-  
+
   // Destructor
   virtual ~Expr_Builder(void) = 0;
 
@@ -28,7 +29,7 @@ public:
   virtual void start_expression(void);
 
   // Builds a number object
-  virtual void build_number (int n) = 0;
+  virtual void build_num (int num) = 0;
 
   // Builds an addition object
   virtual void build_add_operator (void) = 0;
@@ -46,7 +47,7 @@ public:
   virtual void build_mod_operator (void) = 0;
 
   // Returns the expression
-  Math_Expr * get_expression (void) = 0;
+  virtual Math_Expr * get_expression (void) = 0;
 
 };
 

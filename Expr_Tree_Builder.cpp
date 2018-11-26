@@ -38,34 +38,38 @@ void Expr_Tree_Builder::build_num(int num)
 // Add
 void Expr_Tree_Builder::build_add_operator(void)
 {
-  Expr_Node * node = new Add_Expr_Node();
+  // Create the node as a specific concrete type in order to call those methods
+  Add_Expr_Node * node = new Add_Expr_Node();
 
   // Pops off two nodes and sets them as this nodes left and right children
 
   // Check to make sure the stack has two nodes to pop. If not, throws a logic error
   if(this->trees_->is_empty())
   {
-
+    throw logic_error();
   }
 
   node->set_right(this->trees_->pop());
 
   if(this->trees_->is_empty())
   {
-
+    throw logic_error();
   }
 
   node->set_left(this->trees_->pop());
 
+  // Make the node of type Expr_Node
+  Expr_Node * expr_node = node;
+
   // Push the newly created node to the stack
-  this->trees_->push(node);
+  this->trees_->push(expr_node);
 
 }
 
 // Sub
 void Expr_Tree_Builder::build_sub_operator(void)
 {
-  Expr_Node * node = new Sub_Expr_Node();
+  Sub_Expr_Node * node = new Sub_Expr_Node();
 
   // Pops off two nodes and sets them as this nodes left and right children
   // Checks to make sure the stack has two nodes to pop. If not, throws a logic error
@@ -83,15 +87,18 @@ void Expr_Tree_Builder::build_sub_operator(void)
 
   node->set_left(this->trees_->pop());
 
+  // Make the node of type Expr_Node
+  Expr_Node * expr_node = node;
+
   // Push the newly created node to the stack
-  this->trees_->push(node);
+  this->trees_->push(expr_node);
 
 }
 
 // Mult
 void Expr_Tree_Builder::build_mult_operator(void)
 {
-  Expr_Node * node = new Mult_Expr_Node();
+  Mult_Expr_Node * node = new Mult_Expr_Node();
 
   // Pops off two nodes and sets them as this nodes left and right children
   // Checks to make sure the stack has two nodes to pop. If not, throws a logic error
@@ -109,15 +116,18 @@ void Expr_Tree_Builder::build_mult_operator(void)
 
   node->set_left(this->trees_->pop());
 
+  // Make the node of type Expr_node
+  Expr_Node * expr_node = node;
+
   // Push the newly created node to the stack
-  this->trees_->push(node);
+  this->trees_->push(expr_node);
 
 }
 
 // Div
 void Expr_Tree_Builder::build_div_operator(void)
 {
-  Expr_Node * node = new Divide_Expr_Node();
+  Div_Expr_Node * node = new Div_Expr_Node();
 
   // Pops off two nodes and sets them as this nodes left and right children
   // Checks to make sure the stack has two nodes to pop. If not, throws a logic error
@@ -135,15 +145,18 @@ void Expr_Tree_Builder::build_div_operator(void)
 
   node->set_left(this->trees_->pop());
 
+  // Make the node of type Expr_Node
+  Expr_Node * expr_node = node;
+
   // Push the newly created node to the stack
-  this->trees_->push(node);
+  this->trees_->push(expr_node);
 
 }
 
 // Mod
 void Expr_Tree_Builder::build_mod_operator(void)
 {
-  Expr_Node * node = new Mod_Expr_Node();
+  Mod_Expr_Node * node = new Mod_Expr_Node();
 
   // Pops off two nodes and sets them as this nodes left and right children
   // Checks to make sure the stack has two nodes to pop. If not, throws a logic error
@@ -161,12 +174,15 @@ void Expr_Tree_Builder::build_mod_operator(void)
 
   node->set_left(this->trees_->pop());
 
+  // Make the node of type Expr_Node
+  Expr_Node * expr_node = node;
+
   // Push the newly created node to the stack
-  this->trees_->push(node);
+  this->trees_->push(expr_node);
 }
 
 // Get Expression
-Expr_Tree * Expr_Tree_Builder::get_expression(void)
+Math_Expr * Expr_Tree_Builder::get_expression(void)
 {
   // If the stack has an element, set that element as the root node of the Expr_Tree
   if(!this->trees_->is_empty())

@@ -20,8 +20,8 @@ public:
   // Destructor
   ~Add_Expr_Node(void);
 
-  // Allows visitor support this node
-  virtual void accept(Expr_Node_Visitor & visitor);
+  // Allows visitor support on this node
+  virtual void accept(Expr_Node_Visitor & visitor) const;
 
 };
 
