@@ -29,6 +29,9 @@ int Calculator::evaluate(void)
     throw empty_expression();
   }
 
+  // COMMENT: Do not go from infix to postfix then to tree. Instead,
+  // go directly from infix to tree. The extra step is not necessary.
+
   // Convert the expression from infix to postfix
   this->infix_to_postfix();
 
