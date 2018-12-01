@@ -7,17 +7,18 @@
 // Default Constructor
 Expr_Tree_Builder::Expr_Tree_Builder(void)
 : expression_tree_(nullptr),
-  trees_(new Stack<Expr_Node*>),
-  current_node_(nullptr)
+  operators_(new Stack<Bin_Expr_Node*>()),
+  current_nodes_(new Stack<Bin_Expr_Node*>())
 {}
 
 // Destructor
 Expr_Tree_Builder::~Expr_Tree_Builder(void)
 {
-  // Does not delete the expression tree constained here in order to let the client control that
+  // Does not delete the expression tree contained here in order to let the client control that
 
-  // Delete the
-  delete this->trees_;
+  // Delete the two stacks used for building
+  delete this->operators_;
+  delete this->current_nodes_;
 }
 
 // Start Expression
@@ -32,7 +33,7 @@ void Expr_Tree_Builder::build_num(int num)
 {
   // Creates a new number node and pushes it to the stack of nodes
   Expr_Node * node = new Num_Expr_Node(num);
-  this->trees_->push(node);
+  this->current_nodes_->push(node);
 }
 
 // Add
@@ -41,29 +42,14 @@ void Expr_Tree_Builder::build_add_operator(void)
   // Create the node as a specific concrete type in order to call those methods
   Add_Expr_Node * node = new Add_Expr_Node();
 
-  // Pops off two nodes and sets them as this nodes left and right children
-
-  // Check to make sure the stack has two nodes to pop. If not, throws a logic error
-  if(this->trees_->is_empty())
+  // Check for operator presence if the stack is not empty
+  if(!this->operators_->is_empty())
   {
-    throw logic_error();
+    this->move_operators(node);
   }
 
-  node->set_right(this->trees_->pop());
-
-  if(this->trees_->is_empty())
-  {
-    throw logic_error();
-  }
-
-  node->set_left(this->trees_->pop());
-
-  // Make the node of type Expr_Node
-  Expr_Node * expr_node = node;
-
-  // Push the newly created node to the stack
-  this->trees_->push(expr_node);
-
+  // Push the current node to the stack of operators
+  this->operators_->push(node);
 }
 
 // Sub
@@ -71,28 +57,14 @@ void Expr_Tree_Builder::build_sub_operator(void)
 {
   Sub_Expr_Node * node = new Sub_Expr_Node();
 
-  // Pops off two nodes and sets them as this nodes left and right children
-  // Checks to make sure the stack has two nodes to pop. If not, throws a logic error
-  if(this->trees_->is_empty())
+  // Check for operator presence if the stack is not empty
+  if(!this->operators_->is_empty())
   {
-    throw logic_error();
+    this->move_operators(node);
   }
 
-  node->set_right(this->trees_->pop());
-
-  if(this->trees_->is_empty())
-  {
-    throw logic_error();
-  }
-
-  node->set_left(this->trees_->pop());
-
-  // Make the node of type Expr_Node
-  Expr_Node * expr_node = node;
-
-  // Push the newly created node to the stack
-  this->trees_->push(expr_node);
-
+  // Push the current node to the stack of operators
+  this->operators_->push(node);
 }
 
 // Mult
@@ -100,27 +72,14 @@ void Expr_Tree_Builder::build_mult_operator(void)
 {
   Mult_Expr_Node * node = new Mult_Expr_Node();
 
-  // Pops off two nodes and sets them as this nodes left and right children
-  // Checks to make sure the stack has two nodes to pop. If not, throws a logic error
-  if(this->trees_->is_empty())
+  // Check for operator presence if the stack is not empty
+  if(!this->operators_->is_empty())
   {
-    throw logic_error();
+    this->move_operators(node);
   }
 
-  node->set_right(this->trees_->pop());
-
-  if(this->trees_->is_empty())
-  {
-    throw logic_error();
-  }
-
-  node->set_left(this->trees_->pop());
-
-  // Make the node of type Expr_node
-  Expr_Node * expr_node = node;
-
-  // Push the newly created node to the stack
-  this->trees_->push(expr_node);
+  // Push the current node to the stack of operators
+  this->operators_->push(node);
 
 }
 
@@ -129,27 +88,14 @@ void Expr_Tree_Builder::build_div_operator(void)
 {
   Div_Expr_Node * node = new Div_Expr_Node();
 
-  // Pops off two nodes and sets them as this nodes left and right children
-  // Checks to make sure the stack has two nodes to pop. If not, throws a logic error
-  if(this->trees_->is_empty())
+  // Check for operator presence if the stack is not empty
+  if(!this->operators_->is_empty())
   {
-    throw logic_error();
+    this->move_operators(node);
   }
 
-  node->set_right(this->trees_->pop());
-
-  if(this->trees_->is_empty())
-  {
-    throw logic_error();
-  }
-
-  node->set_left(this->trees_->pop());
-
-  // Make the node of type Expr_Node
-  Expr_Node * expr_node = node;
-
-  // Push the newly created node to the stack
-  this->trees_->push(expr_node);
+  // Push the current node to the stack of operators
+  this->operators_->push(node);
 
 }
 
@@ -158,27 +104,59 @@ void Expr_Tree_Builder::build_mod_operator(void)
 {
   Mod_Expr_Node * node = new Mod_Expr_Node();
 
-  // Pops off two nodes and sets them as this nodes left and right children
-  // Checks to make sure the stack has two nodes to pop. If not, throws a logic error
-  if(this->trees_->is_empty())
+  // Check for operator presence if the stack is not empty
+  if(!this->operators_->is_empty())
   {
-    throw logic_error();
+    this->move_operators(node);
   }
 
-  node->set_right(this->trees_->pop());
+  // Push the current node to the stack of operators
+  this->operators_->push(node);
 
-  if(this->trees_->is_empty())
+}
+
+// Open parenthesis
+void Expr_Tree_Builder::build_open_parenthesis(void)
+{
+  // Push a nullptr to the stack of operators to represent an open parenthesis
+  this->operators_->push(nullptr);
+}
+
+// Closed parenthesis
+void Expr_Tree_Builder::build_closed_parenthesis(void)
+{
+  // Pop elements from the stack and add them to the tree until the open parenthesis is found
+
+  // If the stack is empty, throw a logic exception
+  if(this->operators_->is_empty())
   {
-    throw logic_error();
+    throw logic_exception();
   }
 
-  node->set_left(this->trees_->pop());
+  // Pointer to contain the next element from the operator stack
+  Bin_Expr_Node * operator;
 
-  // Make the node of type Expr_Node
-  Expr_Node * expr_node = node;
+  // Runs until stack is empty
+  while(!this->operators_->is_empty())
+  {
+    // Gets the next operator
+    operator = this->operators_->pop();
 
-  // Push the newly created node to the stack
-  this->trees_->push(expr_node);
+    // If the operator equals nullptr then the loop is done
+    if(operator == nullptr)
+    {
+      break;
+    }
+
+    // If the stack is now empty and nullptr was not found then throw a logic error
+    else if(this->operators_->is_empty())
+    {
+      throw logic_exception();
+    }
+
+    // Add this operator to the tree and keep going
+    this->push_to_tree(operator);
+  }
 }
 
 // Get Expression
@@ -193,4 +171,57 @@ Math_Expr * Expr_Tree_Builder::get_expression(void)
   // Return the expression tree stored in state
   return this->expression_tree_;
 
+}
+
+// Helper method: Move operators
+void Expr_Tree_Builder::move_operators(Bin_Expr_Node * node)
+{
+  // If the node is an addition node or a subtraction node
+  if(node->ID == "ADD" || node->ID == "SUB")
+  {
+    // Pop elements off the stack and add to tree until the stack is empty or nullptr is found
+    while(!this->operators_->is_empty() || this->operators_->top() == nullptr)
+    {
+      this->push_to_tree(this->operators_->pop());
+    }
+  }
+
+  // If the node is a multiplication, division, or modulus node
+  else if(node->ID == "MULT" || node->ID == "DIV" || node->ID == "MOD")
+  {
+    // Pop elements off the stack and add to tree until the stack is empty, nullptr is found, or the
+    // element is an addition or subtraction node
+    while(!this->operators_->is_empty() || this->operators_->top() == nullptr)
+    {
+      if(this->operators_->top()->ID != "ADD" && this->operators_->top()->ID != "SUB")
+      {
+        this->push_to_tree(this->operators_->pop());
+      }
+    }
+  }
+}
+
+// Helper method: Push to tree
+void Expr_Tree_Builder::push_to_tree(Bin_Expr_Node * node)
+{
+  // If the stack is empty then throw a logic exception
+  if(this->current_nodes_->is_empty())
+  {
+    throw logic_exception();
+  }
+
+  // Pop an element off the tree stack and set it as the right child of the operator node
+  node->set_right(this->current_nodes_->pop());
+
+  // Check to see if the stack is empty now and if it is throw an exception
+  if(this->current_nodes_->is_empty())
+  {
+    throw logic_exception();
+  }
+
+  // Pop an element off the tree stack and set it as the left child of the operator node
+  node->set_left(this->current_nodes_->pop());
+
+  // Push this operator node to the tree stack
+  this->current_nodes_->push(node);
 }

@@ -1,10 +1,9 @@
 /* I pledge that I have neither given nor received any help on this assignment */
 
 // Driver for the program
-
 #include "Calculator.h"
 
-// For exceptions
+// For exception handling
 #include "Eval_Expr_Tree.h"
 #include "Expr_Builder.h"
 
@@ -12,9 +11,9 @@
 
 int main()
 {
-  // Program takes a string from the user and prints the result until the user enters quit
+  // Program takes a string from the user and prints the result of the expression until the user enters quit
 
-  // String for userInput
+  // String for user input
   std::string userInput;
 
   // Integer to store the result of the evaluated expression

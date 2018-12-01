@@ -17,13 +17,6 @@ public:
   // Evaluates the expression
   virtual int evaluate(void) = 0;
 
-  // Returns the result
-  int get_result(void);
-
-protected:
-  // Holds the result of the mathematical expression
-  int result_;
-
 };
 
 // Include the inline implementation

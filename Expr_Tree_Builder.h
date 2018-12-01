@@ -23,37 +23,48 @@ public:
   // Creates the Expr_Tree object
   virtual void start_expression(void);
 
-  // Builds a number node and pushes it to the stack of nodes
+  // Creates a number node and adds it to the tree
   virtual void build_num(int num);
 
-  // Builds a add node and adds it to the tree in the correct place
+  // Creats an Addition node and pushes it to the operator stack
   virtual void build_add_operator(void);
 
-  // Builds a sub node and adds it to the tree in the correct place
+  // Creates a subraction node and pushes it to the operator Stack
   virtual void build_sub_operator(void);
 
-  // Builds a multiplication node and adds it to the tree in the correct place
+  // Creates a Multiplication node and pushes it to the operator stack
   virtual void build_mult_operator(void);
 
-  // Builds a division node and adds it to the tree in the correct place
+  // Creates a division node and pushes it to the operator stack
   virtual void build_div_operator(void);
 
-  // Builds a modulus node and adds it to the tree in the correct place
+  // Creates a modulus node and pushes it to the operator stack
   virtual void build_mod_operator(void);
 
-  // Builds the actual tree and then returns it
+  // Adds a nullptr element to the stack to represent an open parenthesis
+  virtual void build_open_parenthesis(void);
+
+  // Pops elements off the stack and adds them to the tree until open parenthesis is found
+  virtual void build_closed_parenthesis(void);
+
+  // Returns the stored expression tree
   Math_Expr * get_expression(void);
 
 private:
-
   // Current State of the expression tree
   Expr_Tree * expression_tree_;
 
-  // Stack for moving nodes around and building the tree
-  Stack<Expr_Node*> * trees_;
+  // Stack to represent the nodes in the tree currently being build
+  Stack<Bin_Expr_Node*> current_nodes_;
 
-  // Temporary pointer to an expression node
-  Expr_Node * current_node_;
+  // Stack to hold the operators to be added to the tree later
+  Stack<Bin_Expr_Node*> operators_;
+
+  // Helper method for dealing with operator presedence
+  void move_operators(Bin_Expr_Node * node);
+
+  // Helper method for adding an operator to the tree
+  void push_to_tree(Bin_Expr_Node * node);
 
 };
 

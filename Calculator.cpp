@@ -2,248 +2,168 @@
 
 // Implementation for the Calculator class
 
+// COMMENT: Do not go from infix to postfix then to tree. Instead,
+// go directly from infix to tree. The extra step is not necessary.
+
+// REPLY: Changed the algorithm to convert from infix to tree directly rather than
+// from infix to postfix to tree
+
 #include "Calculator.h"
 
 // Default Constructor
 Calculator::Calculator(void)
-: expression_(""),
+: expression_string_(""),
   result_(),
   expression_tree_(nullptr),
-  operators_(new Stack<std::string>()),
-  postfix_(new Queue<std::string>())
+  operators_(new Stack<Expr_Node*>()),
+  current_nodes_(new Stack<Expr_Node*>())
 {}
 
 // Destructor
 Calculator::~Calculator(void)
 {
   delete this->expression_tree_;
-  delete this->operators_;
 }
 
 // Evaluate
 int Calculator::evaluate(void)
 {
-  // Throw an exception if the user never entered an expression
-  if(this->expression_ == "")
+  // Throw an exception if there is an empty expression
+  if(this->expression_string_ == "")
   {
     throw empty_expression();
   }
 
-  // COMMENT: Do not go from infix to postfix then to tree. Instead,
-  // go directly from infix to tree. The extra step is not necessary.
-
-  // Convert the expression from infix to postfix
-  this->infix_to_postfix();
-
-  // Build the tree from the expression
+  // Call the build tree method
   this->build_tree();
 
-  // Evaluate the tree and set result to the evaluation
-  this->result_ = this->expression_tree_->evaluate();
-
-  // Return the result
+  // Return result
   return this->result_;
 }
 
-// Infix to postfix
-void Calculator::infix_to_postfix(void)
-{
-  // String to hold the current parsed token
-  std::string token;
-
-  // String stream to parse the data
-  std::istringstream stream(this->expression_);
-
-  // Iterates through the entire string
-  while(!stream.eof())
-  {
-    // Gets the current token
-    stream >> token;
-
-    // Test the token for each acceptable token
-
-    // Test for integer
-    if(this->is_int(token))
-    {
-      this->postfix_->enqueue(token);
-    }
-
-    // Test for addition
-    else if(token == "+")
-    {
-      move_operators(token);
-      this->operators_->push(token);
-    }
-
-    // Test for subtraction
-    else if(token == "-")
-    {
-      move_operators(token);
-      this->operators_->push(token);
-    }
-
-    // Test for multiplication
-    else if(token == "*")
-    {
-      move_operators(token);
-      this->operators_->push(token);
-    }
-
-    // Test for division
-    else if(token == "/")
-    {
-      move_operators(token);
-      this->operators_->push(token);
-    }
-
-    // Test for modulus
-    else if(token == "%")
-    {
-      move_operators(token);
-      this->operators_->push(token);
-    }
-
-    // Test for open parenthesis
-    else if(token == "(")
-    {
-      // Push an open parenthesis onto the stack
-      this->operators_->push("(");
-    }
-
-    // Test for closed parenthesis
-    else if(token == ")")
-    {
-      // Pops elements off the stack and enqueues them to postfix_ until open parenthesis is found
-      while(!this->operators_->is_empty())
-      {
-        // If the top does not equal an open parenthesis, pop element and enqueue to postfix
-        if(this->operators_->top() != "(")
-        {
-          this->postfix_->enqueue(this->operators_->pop());
-
-          // If after popping this element the stack is empty, then nullptr was never found and therefore there was
-          // never an open parenthesis. Throw logic exception
-          if(this->operators_->is_empty())
-          {
-
-            throw Expr_Builder::logic_error();
-          }
-        }
-
-        // If the top does equal nullptr, pop it from stack and break from while loop
-        else
-        {
-          this->operators_->pop();
-          break;
-        }
-      }
-    }
-
-    // Invalid token
-    else
-    {
-      throw invalid_token();
-    }
-  }
-
-  // End of expression. Pop all elements off the stack and enqueue to postfix expression
-  while(!this->operators_->is_empty())
-  {
-    // Test to see if the operand on stack is an open parenthesis
-    if(this->operators_->top() != "(")
-    {
-      this->postfix_->enqueue(this->operators_->pop());
-    }
-
-    // An open parenthesis was not closed. Throw logic error
-    else
-    {
-      throw Expr_Builder::logic_error();
-    }
-  }
-
-}
-
-void Calculator::move_operators(std::string token)
-{
-  // If the operator is addition or subtraction
-  if(token == "+" || token == "-")
-  {
-    // Pop operators off the stack until the stack is empty or an open parenthesis is found
-    while(!this->operators_->is_empty() && this->operators_->top() != "(")
-    {
-      this->postfix_->enqueue(this->operators_->pop());
-    }
-  }
-
-  // If the operator is modulus, division, or multiplication
-  else if(token == "*" || token == "/" || token == "%")
-  {
-    // Pop operators off the stack until the stack is empty, an open parenthesis is found, or the
-    // top is a "+" or "-"
-    while(!this->operators_->is_empty() && this->operators_->top() != "(")
-    {
-      if(this->operators_->top() == "+" || this->operators_->top() == "-")
-      {
-        break;
-      }
-
-      this->postfix_->enqueue(this->operators_->pop());
-    }
-  }
-}
-
-// Build Tree
 void Calculator::build_tree(void)
 {
-  // For all elements in the queue, build a node for the tree
+  // Parse the string and test each token type and build nodes accordingly
 
-  // Builder object
-  Expr_Tree_Builder * builder = new Expr_Tree_Builder();
+  // Builder object to build the tree
+  Expr_Builder * builder = new Expr_Tree_Builder();
 
-  // Token for parsing data
+  // Start a new expression
+  builder->start_expression();
+
+  // String for parsing the data
   std::string token;
 
-  while(!this->postfix_->is_empty())
+  // String stream to parse the string
+  std::istringstream stream(this->expression);
+
+  // Catches all exceptions from building in order to delete the builder object to avoid memory leak
+  try
   {
-    token = this->postfix_->dequeue();
-
-    // Number Test
-    if(this->is_int(token))
+    // Iterate through the entire string
+    while(!stream.eof())
     {
-      builder->build_num(std::stoi(token));
-    }
+      // Get the current token
+      stream >> token;
 
-    // Addition Test
-    else if(token == "+")
-    {
-      builder->build_add_operator();
-    }
+      // Integer test
+      if(this->is_int(token))
+      {
+        // Build a number node
+        builder->build_num(std::stoi(token));
+      }
 
-    // Subtraction Test
-    else if(token == "-")
-    {
-      builder->build_sub_operator();
-    }
+      // Addition test
+      else if(token == "+")
+      {
+        // Build an add node
+        builder->build_add_operator();
+      }
 
-    // Multiplication Test
-    else if(token == "*")
-    {
-      builder->build_mult_operator();
-    }
+      // Subtraction test
+      else if(token == "-")
+      {
+        // Build a sub node
+        builder->build_sub_operator();
+      }
 
-    // Division Test
-    else if(token == "/")
-    {
-      builder->build_div_operator();
-    }
+      // Multiplication test
+      else if(token == "*")
+      {
+        // Build a multiplication node
+        builder->build_mult_operator();
+      }
 
-    // Modulus Test
-    else if(token == "%")
-    {
-      builder->build_mod_operator();
+      // Division Test
+      else if(token == "/")
+      {
+        // Build a division node
+        builder->build_div_operator();
+      }
+
+      // Modulus Test
+      else if(token == "%")
+      {
+        // Build a modulus node
+        builder->build_mod_operator();
+      }
+
+      // Open parenthesis test
+      else if(token == "(")
+      {
+        // Build an open parenthesis
+        builder->build_open_parenthesis();
+      }
+
+      // Closed Parenthesis test
+      else if(token == ")")
+      {
+        // Build a closed parenthesis
+        builder->build_closed_parenthesis();
+      }
+
+      // Invalid Token. Throws exception
+      else
+      {
+        // Delete the builder object first
+        delete builder;
+        throw invalid_token();
+      }
     }
   }
+
+  // Catch logic error
+  catch(logic_exception ex)
+  {
+    delete builder;
+    throw logic_exception();
+  }
+
+  // Catch division error
+  catch(divide_by_zero ex)
+  {
+    delete builder;
+    throw divide_by_zero();
+  }
+
+  // Catch mod by zero error
+  catch(mod_by_zero ex)
+  {
+    delete builder;
+    throw mod_by_zero();
+  }
+
+  // Catch all other exceptions
+  catch(...)
+  {
+    delete builder;
+    throw logic_exception();
+  }
+
+
+  // Tree is finished building here. Get the newly created expression tree
+  this->expression_tree_ = builder->get_expression();
+  delete builder;
 }
 
 // Is int

@@ -26,7 +26,7 @@ public:
   virtual ~Expr_Builder(void) = 0;
 
   // Creates the initial expression object
-  virtual void start_expression(void);
+  virtual void start_expression(void) = 0;
 
   // Builds a number object
   virtual void build_num (int num) = 0;
@@ -45,6 +45,12 @@ public:
 
   // Builds a modulus object
   virtual void build_mod_operator (void) = 0;
+
+  // Builds an open parenthesis
+  virtual void build_open_parenthesis(void) = 0;
+
+  // Builds a closed parenthsis
+  virtual void build_closed_parenthesis(void) = 0;
 
   // Returns the expression
   virtual Math_Expr * get_expression (void) = 0;

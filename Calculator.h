@@ -51,28 +51,15 @@ public:
 
 private:
   // String to represent the current expression
-  std::string expression_;
+  std::string expression_string_;
 
   // Integer to store the result
   int result_;
 
   // Expression tree
-  Expr_Tree * expression_tree_;
+  Math_Expr * expression_tree_;
 
-  // Stack for the infix to postfix conversion
-  Stack<std::string> * operators_;
-
-  // Queue to hold the postfix representation of the expression
-  Queue<std::string> * postfix_;
-
-  // Helper methods for evaluating the string are below:
-  // Converts the string saved in state from infix to postfix
-  void infix_to_postfix(void);
-
-  // Helper method for infix_to_postfix. Moves operators around according to precedence
-  void move_operators(std::string token);
-
-  // Builds the Expression tree from the currently saved string
+  // Parses the current expression string and builds the tree using an Expr_Tree_Builder object
   void build_tree(void);
 
   // Tests tokens if they are integers
