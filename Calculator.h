@@ -49,6 +49,9 @@ public:
   // Getter method for the result
   int get_result(void);
 
+  // Clears the calculator to be used again
+  void clear_calculator(void);
+
 private:
   // String to represent the current expression
   std::string expression_string_;

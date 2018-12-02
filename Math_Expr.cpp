@@ -4,6 +4,11 @@
 
 #include "Math_Expr.h"
 
+// Constructor
+Math_Expr::Math_Expr(void)
+: result_()
+{}
+
 // Destructor
 Math_Expr::~Math_Expr(void)
 {}

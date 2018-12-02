@@ -14,9 +14,7 @@
 Calculator::Calculator(void)
 : expression_string_(""),
   result_(),
-  expression_tree_(nullptr),
-  operators_(new Stack<Expr_Node*>()),
-  current_nodes_(new Stack<Expr_Node*>())
+  expression_tree_(nullptr)
 {}
 
 // Destructor
@@ -37,6 +35,9 @@ int Calculator::evaluate(void)
   // Call the build tree method
   this->build_tree();
 
+  // Evaluate the newly built tree
+  this->result_ = this->expression_tree_->evaluate();
+
   // Return result
   return this->result_;
 }
@@ -55,7 +56,7 @@ void Calculator::build_tree(void)
   std::string token;
 
   // String stream to parse the string
-  std::istringstream stream(this->expression);
+  std::istringstream stream(this->expression_string_);
 
   // Catches all exceptions from building in order to delete the builder object to avoid memory leak
   try
@@ -125,39 +126,44 @@ void Calculator::build_tree(void)
       // Invalid Token. Throws exception
       else
       {
-        // Delete the builder object first
-        delete builder;
         throw invalid_token();
       }
     }
   }
 
   // Catch logic error
-  catch(logic_exception ex)
+  catch(Expr_Builder::logic_error ex)
   {
     delete builder;
-    throw logic_exception();
+    throw Expr_Builder::logic_error();
   }
 
   // Catch division error
-  catch(divide_by_zero ex)
+  catch(Eval_Expr_Tree::divide_by_zero ex)
   {
     delete builder;
-    throw divide_by_zero();
+    throw Eval_Expr_Tree::divide_by_zero();
   }
 
   // Catch mod by zero error
-  catch(mod_by_zero ex)
+  catch(Eval_Expr_Tree::mod_by_zero ex)
   {
     delete builder;
-    throw mod_by_zero();
+    throw Eval_Expr_Tree::mod_by_zero();
+  }
+
+  // Catch invalid token error
+  catch(invalid_token ex)
+  {
+    delete builder;
+    throw invalid_token();
   }
 
   // Catch all other exceptions
   catch(...)
   {
     delete builder;
-    throw logic_exception();
+    throw Expr_Builder::logic_error();
   }
 
 

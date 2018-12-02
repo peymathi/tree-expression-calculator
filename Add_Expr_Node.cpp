@@ -6,7 +6,7 @@
 
 // Default Constructor
 Add_Expr_Node::Add_Expr_Node(void)
-: Bin_Expr_Node("ADD"),
+: Bin_Expr_Node("ADD")
 {}
 
 // Initializing Constructor

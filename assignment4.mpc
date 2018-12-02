@@ -34,6 +34,7 @@ project (assignment4) {
   }
 
   Source_Files {
+    Add_Expr_Node.cpp
     Bin_Expr_Node.cpp
     Calculator.cpp
     Div_Expr_Node.cpp

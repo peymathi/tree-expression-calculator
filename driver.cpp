@@ -25,7 +25,7 @@ int main()
   while(true)
   {
     std::cout << "Enter an expression or enter QUIT: ";
-    std::cin >> userInput;
+    std::getline(std::cin, userInput);
 
     // If the user entered QUIT, then break from the loop and the program
     if(userInput == "QUIT")
@@ -77,6 +77,9 @@ int main()
     {
       std::cout << "Unknown Error. Please try again" << std::endl;
     }
+
+    // Clear the calc object
+    calc->clear_calculator();
   }
 
   delete calc;

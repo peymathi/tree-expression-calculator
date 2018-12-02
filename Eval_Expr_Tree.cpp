@@ -26,6 +26,7 @@ void Eval_Expr_Tree::visit_add_node(const Add_Expr_Node & node)
 
   // Add the value from the result of the left operation to the current result
   this->result_ += leftVal;
+
 }
 
 // Visit Sub node

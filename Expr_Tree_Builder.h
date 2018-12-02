@@ -7,6 +7,7 @@
 #define _EXPR_TREE_BUILDER_
 
 #include "Expr_Builder.h"
+#include "Bin_Expr_Node.h"
 #include "Expr_Tree.h"
 #include "Stack.h"
 #include "Queue.h"
@@ -55,10 +56,10 @@ private:
   Expr_Tree * expression_tree_;
 
   // Stack to represent the nodes in the tree currently being build
-  Stack<Bin_Expr_Node*> current_nodes_;
+  Stack<Expr_Node*> * current_nodes_;
 
   // Stack to hold the operators to be added to the tree later
-  Stack<Bin_Expr_Node*> operators_;
+  Stack<Bin_Expr_Node*> * operators_;
 
   // Helper method for dealing with operator presedence
   void move_operators(Bin_Expr_Node * node);

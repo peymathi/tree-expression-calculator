@@ -27,4 +27,6 @@ int Expr_Tree::evaluate(void)
 
   // Set this objects result member to the result member of the visitor object
   this->result_ = evaluator->get_result();
+
+  return this->result_;
 }
