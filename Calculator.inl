@@ -19,5 +19,6 @@ void Calculator::clear_calculator(void)
 {
   this->result_ = 0;
   this->expression_string_ = "";
+  delete this->expression_tree_;
   this->expression_tree_ = nullptr;
 }

@@ -12,6 +12,15 @@
 class Expr_Tree : public Math_Expr
 {
 public:
+  // Exception to be thrown when evaluate method is attempted on a tree that does not have a root
+  class missing_root_exception : public std::exception
+  {
+  public:
+    // Default Constructor
+    missing_root_exception(void)
+    : std::exception()
+    {}
+  };
   // Default Constructor
   Expr_Tree(void);
 

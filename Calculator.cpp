@@ -35,8 +35,19 @@ int Calculator::evaluate(void)
   // Call the build tree method
   this->build_tree();
 
-  // Evaluate the newly built tree
-  this->result_ = this->expression_tree_->evaluate();
+
+  // Makes sure that a root was inputted to the expression tree
+  try
+  {
+    // Evaluate the newly built tree
+    this->result_ = this->expression_tree_->evaluate();
+  }
+
+  // Catch the exception and throw a logic error
+  catch(Expr_Tree::missing_root_exception ex)
+  {
+    throw Expr_Builder::logic_error();
+  }
 
   // Return result
   return this->result_;
@@ -152,7 +163,7 @@ void Calculator::build_tree(void)
     throw Eval_Expr_Tree::mod_by_zero();
   }
 
-  // Catch invalid token error
+  // Catch invalid token error that was just thrown in order to delete builder object
   catch(invalid_token ex)
   {
     delete builder;
@@ -165,7 +176,6 @@ void Calculator::build_tree(void)
     delete builder;
     throw Expr_Builder::logic_error();
   }
-
 
   // Tree is finished building here. Get the newly created expression tree
   this->expression_tree_ = builder->get_expression();

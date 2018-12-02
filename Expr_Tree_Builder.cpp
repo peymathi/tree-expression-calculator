@@ -231,6 +231,7 @@ void Expr_Tree_Builder::push_to_tree(Bin_Expr_Node * node)
   // If the stack is empty then throw a logic exception
   if(this->current_nodes_->is_empty())
   {
+    delete node;
     throw logic_error();
   }
 
@@ -240,6 +241,7 @@ void Expr_Tree_Builder::push_to_tree(Bin_Expr_Node * node)
   // Check to see if the stack is empty now and if it is throw an exception
   if(this->current_nodes_->is_empty())
   {
+    delete node;
     throw logic_error();
   }
 
