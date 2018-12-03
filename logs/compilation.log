@@ -1,0 +1,25 @@
+Generating 'make' output using default input
+Generation Time: 0s
+make[1]: Entering directory `/home/hilljh/cs363-sandbox/assignment4/peymathi/cs363-fall2018-assignment4'
+rm -rf Add_Expr_Node.o Bin_Expr_Node.o Calculator.o Div_Expr_Node.o driver.o Eval_Expr_Tree.o Expr_Builder.o Expr_Node_Visitor.o Expr_Node.o Expr_Tree_Builder.o Expr_Tree.o Math_Expr.o Mod_Expr_Node.o Mult_Expr_Node.o Num_Expr_Node.o Sub_Expr_Node.o Unary_Expr_Node.o
+make[1]: Leaving directory `/home/hilljh/cs363-sandbox/assignment4/peymathi/cs363-fall2018-assignment4'
+make[1]: Entering directory `/home/hilljh/cs363-sandbox/assignment4/peymathi/cs363-fall2018-assignment4'
+g++  -fPIC -O -std=c++11 -D_REENTRANT -c  -o "Add_Expr_Node.o" Add_Expr_Node.cpp
+g++  -fPIC -O -std=c++11 -D_REENTRANT -c  -o "Bin_Expr_Node.o" Bin_Expr_Node.cpp
+g++  -fPIC -O -std=c++11 -D_REENTRANT -c  -o "Calculator.o" Calculator.cpp
+g++  -fPIC -O -std=c++11 -D_REENTRANT -c  -o "Div_Expr_Node.o" Div_Expr_Node.cpp
+g++  -fPIC -O -std=c++11 -D_REENTRANT -c  -o "driver.o" driver.cpp
+g++  -fPIC -O -std=c++11 -D_REENTRANT -c  -o "Eval_Expr_Tree.o" Eval_Expr_Tree.cpp
+g++  -fPIC -O -std=c++11 -D_REENTRANT -c  -o "Expr_Builder.o" Expr_Builder.cpp
+g++  -fPIC -O -std=c++11 -D_REENTRANT -c  -o "Expr_Node_Visitor.o" Expr_Node_Visitor.cpp
+g++  -fPIC -O -std=c++11 -D_REENTRANT -c  -o "Expr_Node.o" Expr_Node.cpp
+g++  -fPIC -O -std=c++11 -D_REENTRANT -c  -o "Expr_Tree_Builder.o" Expr_Tree_Builder.cpp
+g++  -fPIC -O -std=c++11 -D_REENTRANT -c  -o "Expr_Tree.o" Expr_Tree.cpp
+g++  -fPIC -O -std=c++11 -D_REENTRANT -c  -o "Math_Expr.o" Math_Expr.cpp
+g++  -fPIC -O -std=c++11 -D_REENTRANT -c  -o "Mod_Expr_Node.o" Mod_Expr_Node.cpp
+g++  -fPIC -O -std=c++11 -D_REENTRANT -c  -o "Mult_Expr_Node.o" Mult_Expr_Node.cpp
+g++  -fPIC -O -std=c++11 -D_REENTRANT -c  -o "Num_Expr_Node.o" Num_Expr_Node.cpp
+g++  -fPIC -O -std=c++11 -D_REENTRANT -c  -o "Sub_Expr_Node.o" Sub_Expr_Node.cpp
+g++  -fPIC -O -std=c++11 -D_REENTRANT -c  -o "Unary_Expr_Node.o" Unary_Expr_Node.cpp
+g++  -fPIC -O -std=c++11 -D_REENTRANT -L"." Add_Expr_Node.o Bin_Expr_Node.o Calculator.o Div_Expr_Node.o driver.o Eval_Expr_Tree.o Expr_Builder.o Expr_Node_Visitor.o Expr_Node.o Expr_Tree_Builder.o Expr_Tree.o Math_Expr.o Mod_Expr_Node.o Mult_Expr_Node.o Num_Expr_Node.o Sub_Expr_Node.o Unary_Expr_Node.o -ldl -lrt -lpthread -o "assignment4"
+make[1]: Leaving directory `/home/hilljh/cs363-sandbox/assignment4/peymathi/cs363-fall2018-assignment4'
