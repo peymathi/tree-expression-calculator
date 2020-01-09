@@ -6,17 +6,17 @@ CXX           = g++
 LD            = $(CXX) $(CCFLAGS) $(CPPFLAGS)
 AR            = ar
 PICFLAGS      = -fPIC
-CPPFLAGS      = $(PICFLAGS) $(GENFLAGS) -std=c++11 -D_REENTRANT
+CPPFLAGS      = $(PICFLAGS) $(GENFLAGS) -std=c++11 -D_REENTRANT -I"headers" -I"inline" -I"source" -I"template"
 OBJEXT        = .o
 OUTPUT_OPTION = -o "$@"
 COMPILE.c     = $(CC) $(CFLAGS) $(CPPFLAGS) -c
 COMPILE.cc    = $(CXX) $(CCFLAGS) $(CPPFLAGS) -c
 LDFLAGS       = -L"."
 CCC           = $(CXX)
-MAKEFILE      = Makefile.assignment4
+MAKEFILE      = Makefile.expression_calc_tree
 DEPENDENCIES  = .depend.$(MAKEFILE)
-BTARGETDIR    = ./
-BIN           = $(BTARGETDIR)assignment4$(EXESUFFIX)$(EXEEXT)
+BTARGETDIR    = ./bin/
+BIN           = $(BTARGETDIR)expression_calc_tree.exe$(EXESUFFIX)$(EXEEXT)
 CAT           = cat
 MV            = mv -f
 RM            = rm -rf
@@ -31,8 +31,8 @@ LIBPREFIX     = lib
 LIBSUFFIX     = 
 GENFLAGS      = -O
 LDLIBS        = -ldl $(subst lib,-l,$(sort $(basename $(notdir $(wildcard /usr/lib/librt.so /lib/librt.so))))) -lpthread
-OBJS          = Add_Expr_Node$(OBJEXT) Bin_Expr_Node$(OBJEXT) Calculator$(OBJEXT) Div_Expr_Node$(OBJEXT) driver$(OBJEXT) Eval_Expr_Tree$(OBJEXT) Expr_Builder$(OBJEXT) Expr_Node_Visitor$(OBJEXT) Expr_Node$(OBJEXT) Expr_Tree_Builder$(OBJEXT) Expr_Tree$(OBJEXT) Math_Expr$(OBJEXT) Mod_Expr_Node$(OBJEXT) Mult_Expr_Node$(OBJEXT) Num_Expr_Node$(OBJEXT) Sub_Expr_Node$(OBJEXT) Unary_Expr_Node$(OBJEXT)
-SRC           = Add_Expr_Node.cpp Bin_Expr_Node.cpp Calculator.cpp Div_Expr_Node.cpp driver.cpp Eval_Expr_Tree.cpp Expr_Builder.cpp Expr_Node_Visitor.cpp Expr_Node.cpp Expr_Tree_Builder.cpp Expr_Tree.cpp Math_Expr.cpp Mod_Expr_Node.cpp Mult_Expr_Node.cpp Num_Expr_Node.cpp Sub_Expr_Node.cpp Unary_Expr_Node.cpp
+OBJS          = source/Add_Expr_Node$(OBJEXT) source/Bin_Expr_Node$(OBJEXT) source/Calculator$(OBJEXT) source/Div_Expr_Node$(OBJEXT) source/Eval_Expr_Tree$(OBJEXT) source/Expr_Builder$(OBJEXT) source/Expr_Node$(OBJEXT) source/Expr_Node_Visitor$(OBJEXT) source/Expr_Tree$(OBJEXT) source/Expr_Tree_Builder$(OBJEXT) source/Math_Expr$(OBJEXT) source/Mod_Expr_Node$(OBJEXT) source/Mult_Expr_Node$(OBJEXT) source/Num_Expr_Node$(OBJEXT) source/Sub_Expr_Node$(OBJEXT) source/Unary_Expr_Node$(OBJEXT) source/driver$(OBJEXT)
+SRC           = source/Add_Expr_Node.cpp source/Bin_Expr_Node.cpp source/Calculator.cpp source/Div_Expr_Node.cpp source/Eval_Expr_Tree.cpp source/Expr_Builder.cpp source/Expr_Node.cpp source/Expr_Node_Visitor.cpp source/Expr_Tree.cpp source/Expr_Tree_Builder.cpp source/Math_Expr.cpp source/Mod_Expr_Node.cpp source/Mult_Expr_Node.cpp source/Num_Expr_Node.cpp source/Sub_Expr_Node.cpp source/Unary_Expr_Node.cpp source/driver.cpp
 LINK.cc       = $(LD) $(LDFLAGS)
 EXPORTFLAGS   = 
 DEPLIBS       = $(foreach lib, , $(foreach libpath, ., $(wildcard $(libpath)/lib$(lib).a)))
@@ -50,56 +50,56 @@ $(BIN): $(OBJS) $(DEPLIBS)
 generated: $(GENERATED_DIRTY)
 	@-:
 
-Add_Expr_Node$(OBJEXT): Add_Expr_Node.cpp
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Add_Expr_Node.cpp
+source/Add_Expr_Node$(OBJEXT): source/Add_Expr_Node.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) source/Add_Expr_Node.cpp
 
-Bin_Expr_Node$(OBJEXT): Bin_Expr_Node.cpp
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Bin_Expr_Node.cpp
+source/Bin_Expr_Node$(OBJEXT): source/Bin_Expr_Node.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) source/Bin_Expr_Node.cpp
 
-Calculator$(OBJEXT): Calculator.cpp
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Calculator.cpp
+source/Calculator$(OBJEXT): source/Calculator.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) source/Calculator.cpp
 
-Div_Expr_Node$(OBJEXT): Div_Expr_Node.cpp
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Div_Expr_Node.cpp
+source/Div_Expr_Node$(OBJEXT): source/Div_Expr_Node.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) source/Div_Expr_Node.cpp
 
-driver$(OBJEXT): driver.cpp
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) driver.cpp
+source/Eval_Expr_Tree$(OBJEXT): source/Eval_Expr_Tree.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) source/Eval_Expr_Tree.cpp
 
-Eval_Expr_Tree$(OBJEXT): Eval_Expr_Tree.cpp
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Eval_Expr_Tree.cpp
+source/Expr_Builder$(OBJEXT): source/Expr_Builder.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) source/Expr_Builder.cpp
 
-Expr_Builder$(OBJEXT): Expr_Builder.cpp
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Expr_Builder.cpp
+source/Expr_Node$(OBJEXT): source/Expr_Node.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) source/Expr_Node.cpp
 
-Expr_Node_Visitor$(OBJEXT): Expr_Node_Visitor.cpp
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Expr_Node_Visitor.cpp
+source/Expr_Node_Visitor$(OBJEXT): source/Expr_Node_Visitor.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) source/Expr_Node_Visitor.cpp
 
-Expr_Node$(OBJEXT): Expr_Node.cpp
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Expr_Node.cpp
+source/Expr_Tree$(OBJEXT): source/Expr_Tree.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) source/Expr_Tree.cpp
 
-Expr_Tree_Builder$(OBJEXT): Expr_Tree_Builder.cpp
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Expr_Tree_Builder.cpp
+source/Expr_Tree_Builder$(OBJEXT): source/Expr_Tree_Builder.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) source/Expr_Tree_Builder.cpp
 
-Expr_Tree$(OBJEXT): Expr_Tree.cpp
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Expr_Tree.cpp
+source/Math_Expr$(OBJEXT): source/Math_Expr.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) source/Math_Expr.cpp
 
-Math_Expr$(OBJEXT): Math_Expr.cpp
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Math_Expr.cpp
+source/Mod_Expr_Node$(OBJEXT): source/Mod_Expr_Node.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) source/Mod_Expr_Node.cpp
 
-Mod_Expr_Node$(OBJEXT): Mod_Expr_Node.cpp
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Mod_Expr_Node.cpp
+source/Mult_Expr_Node$(OBJEXT): source/Mult_Expr_Node.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) source/Mult_Expr_Node.cpp
 
-Mult_Expr_Node$(OBJEXT): Mult_Expr_Node.cpp
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Mult_Expr_Node.cpp
+source/Num_Expr_Node$(OBJEXT): source/Num_Expr_Node.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) source/Num_Expr_Node.cpp
 
-Num_Expr_Node$(OBJEXT): Num_Expr_Node.cpp
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Num_Expr_Node.cpp
+source/Sub_Expr_Node$(OBJEXT): source/Sub_Expr_Node.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) source/Sub_Expr_Node.cpp
 
-Sub_Expr_Node$(OBJEXT): Sub_Expr_Node.cpp
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Sub_Expr_Node.cpp
+source/Unary_Expr_Node$(OBJEXT): source/Unary_Expr_Node.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) source/Unary_Expr_Node.cpp
 
-Unary_Expr_Node$(OBJEXT): Unary_Expr_Node.cpp
-	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) Unary_Expr_Node.cpp
+source/driver$(OBJEXT): source/driver.cpp
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) source/driver.cpp
 
 clean:
 	-$(RM) $(OBJS)
