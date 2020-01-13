@@ -22,11 +22,12 @@ int main()
   // Calculator object
   Calculator * calc = new Calculator();
 
+  
+
   while(true)
   {
     std::cout << "Enter an expression or enter QUIT: ";
     std::getline(std::cin, userInput);
-
     // If the user entered QUIT, then break from the loop and the program
     if(userInput == "QUIT")
     {
@@ -39,7 +40,7 @@ int main()
       calc->set_expression(userInput);
       result = calc->evaluate();
 
-      std::cout << result << std::endl;
+      std::cout << result;
     }
 
     // Catches Divide by zero exception
@@ -80,6 +81,7 @@ int main()
 
     // Clear the calc object
     calc->clear_calculator();
+
   }
 
   delete calc;
