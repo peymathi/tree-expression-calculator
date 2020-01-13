@@ -6,9 +6,7 @@ Version 1 of the expression calculator, which uses a Stack instead of a Tree, ca
 Version 3 of the expression calculator, which combines Versions 1 and 2 and adds a web interface, can be found [here](https://github.com/peymathi/expression-calculator-web).
 
 ## Installation
-Clone the repository with:
-
-```git clone https://github.com/peymathi/tree-expression-calculator.git```
+Clone the repository with: `git clone https://github.com/peymathi/tree-expression-calculator.git`
 
 Run `make`
 
