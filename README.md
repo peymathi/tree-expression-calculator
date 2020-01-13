@@ -10,6 +10,8 @@ Clone the repository with: `git clone https://github.com/peymathi/tree-expressio
 
 Run `make`
 
+## How to Run
+
 Run `bin/expression_calc_tree.exe`
 
 Enter any expression using digits 0-9 and operators '*', '/', '+', '-', '%', '(', ')', with a space between every number and operator.
